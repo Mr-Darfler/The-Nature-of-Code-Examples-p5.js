@@ -18,7 +18,7 @@ function draw() {
   var force = attractor.calculateAttraction(mover);
   mover.applyForce(force);
   mover.update();
-  
+
   attractor.display();
   mover.display();
 }
