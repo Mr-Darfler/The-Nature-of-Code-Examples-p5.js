@@ -2,9 +2,9 @@
 // Daniel Shiffman
 // http://natureofcode.com
 
-var angle = 0;
-var aVelocity = 0;
-var aAcceleration = 0.0001;
+let angle = 0;
+let aVelocity = 0;
+valetr aAcceleration = 0.0001;
 
 function setup() {
   createCanvas(640, 360);
