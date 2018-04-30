@@ -12,6 +12,8 @@
 //      -- mate DNA with another set of DNA
 //      -- mutate DNA
 
+//This is a comet
+
 function newChar() {
   var c = floor(random(63,122));
   if (c === 63) c = 32;
