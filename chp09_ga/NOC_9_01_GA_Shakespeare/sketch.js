@@ -58,16 +58,16 @@ function setup() {
 
   // Create a population with a target phrase, mutation rate, and population max
   population = new Population(target, mutationRate, popmax);
-  while(!population.isFinished()){
-    population.naturalSelection();
-    //Create next generation
-    population.generate();
-    // Calculate fitness
-    population.calcFitness();
-
-    population.evaluate();
-  }
-  displayInfo();
+  // while(!population.isFinished()){
+  //   population.naturalSelection();
+  //   //Create next generation
+  //   population.generate();
+  //   // Calculate fitness
+  //   population.calcFitness();
+  //
+  //   population.evaluate();
+  // }
+  // displayInfo();
 }
 
 function draw() {
@@ -86,7 +86,7 @@ function draw() {
     noLoop();
   }
 
-  //displayInfo();
+  displayInfo();
 }
 
 function displayInfo() {
