@@ -7,6 +7,7 @@ class MetaGA {
     this.popSize = popSize;
     this.rateOfChange = 1;
     this.finished = false;
+    this.currentAve = 1;
   }
 
   createGA() {
@@ -18,26 +19,30 @@ class MetaGA {
       this.population.evaluate();
       this.population.naturalSelection();
       this.population.generate();
-      if(this.population.generations > 1000) break;
+      if(this.population.generations > 2000) break;
     }
     this.numGens.push(this.population.generations);
 
 
   }
-  rateOfChange() {
-    const runLength = 10;
-    if (this.numGens.length > runLength) {
-      this.numGens.shift();
-      let runningAve = this.numGens.reduce((a, cv) => a + cv);
-      runningAve = runningAve / runLength;
+  calcRateOfChange() {
 
-      const last = this.numGens[this.numGens.length - 1];
-      this.rateOfChange = abs((last - runningAve) / runningAve);
+      let total = this.numGens.reduce((a, cv) => a + cv);
+      let newAve = total / this.numGens.length;
+
+      this.rateOfChange = abs(newAve - this.currentAve) / this.currentAve;
+      this.currentAve = newAve;
+  }
+
+  evaluate(threshold,minRuns){
+    if(this.rateOfChange < threshold && this.numGens.length > minRuns) {
+      this.finished = true;
+    } else {
+      this.finished = false;
     }
   }
 
-  isFinished(threshold){
-    if(this.rateOfChange < threshold) this.finished = true;
+  isFinished(){
     return this.finished;
   }
 

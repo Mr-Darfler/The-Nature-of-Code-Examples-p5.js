@@ -22,10 +22,10 @@ function setup() {
   // w = width/monteCarlo;
   //
   target = "To be or not to be.";
-  popMax = 800;
+  popMax = 200;
   mutationRate = 0.01;
 
-  metaGA = new MetaGA(target,mutationRate,popMax);
+  metaGA = new MetaGA(target, mutationRate, popMax);
 
 
 
@@ -38,9 +38,16 @@ function setup() {
 }
 
 function draw() {
-  metaGA.createGA();
-  metaGA.evolve();
-  console.log(metaGA.getAveGens());
+  while(!metaGA.isFinished(0.01)) {
+    metaGA.createGA();
+    metaGA.evolve();
+    metaGA.calcRateOfChange();
+    metaGA.evaluate(0.01,20);
+    console.log(metaGA.rateOfChange);
+    if(metaGA.numGens.length > 50) break;
+  }
+  console.log("Average Number of Generations: ",metaGA.currentAve)
+  console.log("RoC: ",metaGA.rateOfChange)
   noLoop()
 
 }
