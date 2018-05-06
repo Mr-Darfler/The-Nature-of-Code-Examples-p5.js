@@ -30,9 +30,19 @@
 
 
 function setup() {
+  population = new Population(target, mutationRate, popmax);
 }
 
 function draw() {
+  population.calcFitness()
+  populaiton.evaluate();
+
+  if(population.isDone()){
+    consoloe.log(population.generations);
+    noLoop();
+  }
+  population.naturalSelection();
+  population.generate();
 }
 
 function displayInfo() {
