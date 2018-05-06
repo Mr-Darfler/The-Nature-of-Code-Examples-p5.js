@@ -1,4 +1,4 @@
-class GARun {
+class MetaGA {
   constructor(targetPhrase, mutationRate, popSize) {
     this.numGens = [];
     this.population;
@@ -16,8 +16,8 @@ class GARun {
     while(!this.population.isFinished()){
       this.population.calcFitness();
       this.population.evaluate();
-      this.naturalSelection();
-      this.generate();
+      this.population.naturalSelection();
+      this.population.generate();
       if(this.population.generations > 1000) break;
     }
     this.numGens.push(this.population.generations);
@@ -39,7 +39,10 @@ class GARun {
   isFinished(threshold){
     if(this.rateOfChange < threshold) this.finished = true;
     return this.finished;
-    }
+  }
+
+  getAveGens(){
+    return this.numGens[this.numGens.length - 1];
   }
 
 }

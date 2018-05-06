@@ -38,8 +38,8 @@ function setup() {
 }
 
 function draw() {
-  metaGa.createGA();
-  metaGa.evolve();
+  metaGA.createGA();
+  metaGA.evolve();
   console.log(metaGA.getAveGens());
   noLoop()
 
