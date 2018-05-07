@@ -1,12 +1,20 @@
 function newChar() {
-  
+  let c = floor(random(63,90));
+  if (c == 63) c = 32;
+  if (c == 64) c = 46;
+
+  c = String.fromCharCode(c);
+
+  return c;
 }
 
 // Constructor (makes a random DNA)
 class DNA {
   // The genetic sequence
-  constructor(num){
-
+  constructor(length){
+    this.genes = Array(length).fill(0).map(() => newChar());
+    this.fitness = NaN;
+    this.length = length
   }
 
   // Converts character array to a String
@@ -16,6 +24,12 @@ class DNA {
 
   // Fitness function (returns floating point % of "correct" characters)
   calcFitness(target) {
+    let score = 0;
+    for(let i = 0; i < this.length; i++){
+      if(this.genes[i] == target[i]) score++
+    };
+     this.fitness = score/this.length;
+
   }
 
   // Crossover
