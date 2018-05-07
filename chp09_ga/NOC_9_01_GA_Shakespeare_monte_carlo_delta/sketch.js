@@ -1,7 +1,5 @@
 let target;
-let popSize;
-let mutationRate;
-let metaGA;
+let gaPop;
 // let aveGen = [0];
 // let iterator = 0;
 // let monteCarlo = 100;
@@ -22,32 +20,32 @@ function setup() {
   // w = width/monteCarlo;
   //
   target = "To be or not to be.";
-  popMax = 200;
-  mutationRate = 0.01;
 
-  metaGA = new MetaGA(target, mutationRate, popMax);
+  gaPop = new GAPop(target,2);
+  console.log(gaPop)
+  gaPop.evaluate();
+  gaPop.naturalSelection();
+  console.log(done)
+  // popMax = 200;
+  // mutationRate = 0.01;
+  // let genome = Array(6).fill(0).map(()=> floor(random(10)));
+  //
+  // metaGA = new GA(target, [1,0,0,8,0,0]);
 
-
-
-  //for (let popMax = 100; popMax < 1000; popMax += 100) {
-
-  //for (let mutationRate = 0.0005; mutationRate < 0.05; mutationRate += 0.005) {
-
-  //for (let i = 0; i < 10; i++) {
-
-}
-
-function draw() {
-  while(!metaGA.isFinished(0.01)) {
-    metaGA.createGA();
-    metaGA.evolve();
-    metaGA.calcRateOfChange();
-    metaGA.evaluate(0.01,20);
-    console.log(metaGA.rateOfChange);
-    if(metaGA.numGens.length > 50) break;
-  }
-  console.log("Average Number of Generations: ",metaGA.currentAve)
-  console.log("RoC: ",metaGA.rateOfChange)
-  noLoop()
 
 }
+
+// function draw() {
+//   while(!metaGA.isFinished(0.01)) {
+//     metaGA.createGA();
+//     metaGA.evolve();
+//     metaGA.calcRateOfChange();
+//     metaGA.evaluate(0.1,10);
+//     console.log('rateOfChange: ',metaGA.rateOfChange,"\n Time: ",metaGA.executionTime[metaGA.executionTime.length-1]);
+//     if(metaGA.executionTime.length > 50) break;
+//   }
+//   console.log("Average Time: ",metaGA.currentAve,"\nRoC: ",metaGA.rateOfChange)
+//
+//   noLoop()
+//
+// }

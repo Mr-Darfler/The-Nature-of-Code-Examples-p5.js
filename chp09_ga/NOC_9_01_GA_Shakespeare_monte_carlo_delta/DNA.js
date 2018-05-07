@@ -66,3 +66,12 @@ class DNA {
   }
 
 }
+
+class GA_DNA extends DNA{
+  constructor(){
+    super();
+    this.genes = Array(6).fill(0).map(()=>floor(random(10)));
+    this.fitness = NaN;
+  }
+
+}
