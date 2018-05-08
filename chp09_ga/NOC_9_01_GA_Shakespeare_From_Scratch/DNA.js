@@ -12,8 +12,8 @@ function newChar() {
 class DNA {
   // The genetic sequence
   constructor(length){
-    this.genes = Array(length).fill(0).map(() => newChar());
-    this.fitness = NaN;
+    this.genes = Array(length).fill(0).map(newChar);
+    this.fitness = 0;
     this.length = length
   }
 

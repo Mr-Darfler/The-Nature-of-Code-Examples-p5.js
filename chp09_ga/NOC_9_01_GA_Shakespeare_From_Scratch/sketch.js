@@ -29,9 +29,14 @@
 //   # Rinse and repeat
 
 let targetPhrase = "I FEEL LIKE KOBE";
+let mutationRate = 0.01;
+let popSize = 200;
 
 function setup() {
-  //population = new Population(target, mutationRate, popmax);
+  population = new Population(targetPhrase, mutationRate, popSize);
+  population.calcFitness();
+  population.naturalSelection();
+
 
 }
 
