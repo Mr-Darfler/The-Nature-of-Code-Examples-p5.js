@@ -13,7 +13,7 @@ class DNA {
   // The genetic sequence
   constructor(length){
     this.genes = Array(length).fill(0).map(newChar);
-    this.fitness = 0;
+    this.fitness = NaN;
     this.length = length
   }
 
@@ -34,10 +34,24 @@ class DNA {
 
   // Crossover
   crossover(partner) {
+    let child = new DNA(this.length);
+    let crossoverPoint = floor(random(this.length));
+
+    for(let i = 0; i < this.length; i++){
+      if(i < crossoverPoint) {
+        child.genes[i] = this.genes[i]
+      } else {
+        child.genes[i] = partner.genes[i]
+      }
+      return child;
+    }
 
   }
 
   // Based on a mutation probability, picks a new random character
   mutate(mutationRate) {
+    for(let i = 0; i < this.length; i++){
+      if(random()<mutationRate) this.genes[i] = newChar();
+    }
   }
 }

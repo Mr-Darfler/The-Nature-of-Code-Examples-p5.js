@@ -33,9 +33,9 @@ let mutationRate = 0.01;
 let popSize = 200;
 
 function setup() {
-  population = new Population(targetPhrase, mutationRate, popSize);
-  population.calcFitness();
-  population.naturalSelection();
+  pop = new Population(targetPhrase, mutationRate, popSize);
+  pop.calcFitness();
+  pop.naturalSelection();
 
 
 }
