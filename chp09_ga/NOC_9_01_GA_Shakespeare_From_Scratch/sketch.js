@@ -28,29 +28,26 @@
 //
 //   # Rinse and repeat
 
-let targetPhrase = "I FEEL LIKE KOBE";
+let targetPhrase = "I FEEL LIKE KOBE.";
 let mutationRate = 0.01;
 let popSize = 200;
 
 function setup() {
-  pop = new Population(targetPhrase, mutationRate, popSize);
-  pop.calcFitness();
-  pop.naturalSelection();
-
+  population = new Population(targetPhrase, mutationRate, popSize);
 
 }
 
 function draw() {
-  // population.calcFitness()
-  // populaiton.evaluate();
-  //
-  // if(population.isDone()){
-  //   consoloe.log(population.generations);
-  //   noLoop();
-  // }
-  // population.naturalSelection();
-  // population.generate();
-}
+  population.calcFitness()
 
-function displayInfo() {
+  console.log(population.getAverageFitness());
+  population.evaluate();
+
+  if(population.isDone()){
+    console.log("Number of Generations: " + population.generations);
+    noLoop();
+  }
+  population.naturalSelection();
+  population.generate();
+
 }

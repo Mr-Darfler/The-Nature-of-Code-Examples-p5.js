@@ -79,7 +79,7 @@ class Population{
     }
   }
 
-  isFinished() {
+  isDone() {
     return this.finished;
   }
 

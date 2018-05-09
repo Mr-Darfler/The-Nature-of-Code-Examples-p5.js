@@ -1,57 +1,66 @@
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+// Genetic Algorithm, Evolving Shakespeare
+
+// A class to describe a pseudo-DNA, i.e. genotype
+//   Here, a virtual organism's DNA is an array of character.
+//   Functionality:
+//      -- convert DNA into a string
+//      -- calculate DNA's "fitness"
+//      -- mate DNA with another set of DNA
+//      -- mutate DNA
+
 function newChar() {
-  let c = floor(random(63,90));
-  if (c == 63) c = 32;
-  if (c == 64) c = 46;
+  var c = floor(random(63,122));
+  if (c === 63) c = 32;
+  if (c === 64) c = 46;
 
-  c = String.fromCharCode(c);
-
-  return c;
+  return String.fromCharCode(c);
 }
 
 // Constructor (makes a random DNA)
 class DNA {
-  // The genetic sequence
-  constructor(length){
-    this.genes = Array(length).fill(0).map(newChar);
-    this.fitness = NaN;
-    this.length = length
+
+  constructor(num){
+    this.genes = Array(num).fill(0).map(newChar);
+    this.len = this.genes.length;
+    this.fitness = 0;
   }
 
-  // Converts character array to a String
-  getPhrase() {
+  getPhrase(){
     return this.genes.join("");
   }
 
-  // Fitness function (returns floating point % of "correct" characters)
   calcFitness(target) {
     let score = 0;
-    for(let i = 0; i < this.length; i++){
-      if(this.genes[i] == target[i]) score++
-    };
-     this.fitness = score/this.length;
-
-  }
-
-  // Crossover
-  crossover(partner) {
-    let child = new DNA(this.length);
-    let crossoverPoint = floor(random(this.length));
-
-    for(let i = 0; i < this.length; i++){
-      if(i < crossoverPoint) {
-        child.genes[i] = this.genes[i]
-      } else {
-        child.genes[i] = partner.genes[i]
+    for (let i = 0; i < this.len; i++){
+      if (this.genes[i] == target.charAt(i)){
+        score++;
       }
-      return child;
     }
-
+    this.fitness = score/this.len;
   }
 
-  // Based on a mutation probability, picks a new random character
+  crossover(partner) {
+    let child = new DNA(this.len);
+
+    let midpoint = floor(random(this.len));
+
+    for(let i = 0; i < this.len; i++){
+      if( i < midpoint) child.genes[i] = this.genes[i];
+      else child.genes[i] = partner.genes[i];
+    }
+    return child;
+  }
+
   mutate(mutationRate) {
-    for(let i = 0; i < this.length; i++){
-      if(random()<mutationRate) this.genes[i] = newChar();
+    for(let i = 0; i < this.len; i++){
+      if(random() < mutationRate){
+        this.genes[i] = newChar();
+      }
     }
   }
+
 }
