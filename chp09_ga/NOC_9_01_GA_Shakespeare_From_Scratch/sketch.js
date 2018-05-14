@@ -31,23 +31,56 @@
 let targetPhrase = "I FEEL LIKE KOBE.";
 let mutationRate = 0.01;
 let popSize = 200;
+let generations = [];
+let error,stdDev;
+let averageGenerations;
+
+let genP, meanP, stdDevP, errorP, percentErrorP;
+
 
 function setup() {
   population = new Population(targetPhrase, mutationRate, popSize);
-
+  population.calcFitness();
+  population.evaluate();
+  
+  genP = createP("Number of current generations: ");
+  meanP = createP("Average number of generations: ");
+  stdDevP = createP("Standard Deviation from the mean: ");
+  errorP = createP("Error at 95% confidence: +/-");
+  percentErrorP = createP("Error as percentage of the mean: ")
 }
 
 function draw() {
-  population.calcFitness()
-
-  console.log(population.getAverageFitness());
-  population.evaluate();
 
   if(population.isDone()){
-    console.log("Number of Generations: " + population.generations);
-    noLoop();
+    generations.push(population.getGenerations());
+    if(generations.length != 1) {
+      averageGenerations = ss.mean(generations);
+      stdDev = ss.standardDeviation(generations);
+      error = 2 * (stdDev/sqrt(generations.length));
+      displayStats();
+    }
+    population = new Population(targetPhrase, mutationRate, popSize);
+    population.calcFitness();
+    population.evaluate();
+
+    if(error/averageGenerations < 0.05) {
+      console.log("!!!! Ave number of generations: ",averageGenerations," +/-",error);
+      console.log("!!!! Number of populations: "+generations.length)
+      noLoop();
+    }
   }
   population.naturalSelection();
   population.generate();
+  population.calcFitness();
+  population.evaluate();
 
+}
+
+function displayStats(){
+  genP.html("Number of samples: "+generations.length)
+  meanP.html("Average number of generations: "+averageGenerations);
+  stdDevP.html("Standard deviation from the mean: "+stdDev)
+  errorP.html("Error at 95% confidence: +/-"+error);
+  percentErrorP.html("Error as percentage of the mean: "+(error/averageGenerations)*100,"\n")
 }

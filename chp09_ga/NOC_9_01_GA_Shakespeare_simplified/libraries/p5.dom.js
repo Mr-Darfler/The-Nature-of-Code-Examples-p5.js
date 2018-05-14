@@ -566,7 +566,7 @@
    * Creates a radio button &lt;input&gt;&lt;/input&gt; element in the DOM.
    *
    * @method createRadio
-   * @param  {String} [divId] the id and name of the created div and input field respectively 
+   * @param  {String} [divId] the id and name of the created div and input field respectively
    * @return {Object/p5.Element} pointer to p5.Element holding created node
    */
   p5.prototype.createRadio = function() {
@@ -646,7 +646,7 @@
     };
     return self
   };
-  
+
   /**
    * Creates an &lt;input&gt;&lt;/input&gt; element in the DOM for text input.
    * Use .size() to set the display length of the box.
@@ -729,7 +729,7 @@
           }
         }
       }
-      
+
       // Now let's handle when a file was selected
       elt.addEventListener('change', handleFileSelect, false);
       return addElement(elt, this);
@@ -1707,13 +1707,13 @@
    *  element reaches the end. If the element is looping,
    *  this will not be called. The element is passed in
    *  as the argument to the onended callback.
-   *  
+   *
    *  @method  onended
    *  @param  {Function} callback function to call when the
    *                              soundfile has ended. The
    *                              media element will be passed
    *                              in as the argument to the
-   *                              callback.                            
+   *                              callback.
    *  @return {Object/p5.MediaElement}
    *  @example
    *  <div><code>
