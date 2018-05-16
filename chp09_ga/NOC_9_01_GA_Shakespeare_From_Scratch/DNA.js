@@ -41,6 +41,7 @@ class DNA {
       }
     }
     this.fitness = score/this.len;
+    this.fitness *= this.fitness
   }
 
   crossover(partner) {
