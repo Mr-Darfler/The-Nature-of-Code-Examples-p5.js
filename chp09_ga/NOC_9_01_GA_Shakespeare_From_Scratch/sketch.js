@@ -48,7 +48,7 @@ function draw() {
 
       sTime = millis() //start clock
 
-      while ((sampleError / sampleMean > 0.2 || numGens.length < 10) && numGens.length < 500) {
+      while ((sampleError / sampleMean > 0.1 || numGens.length < 10) && numGens.length < 500) {
         //console.log(sampleError/sampleMean)
         population.calcFitness();
         population.evaluate();
